@@ -1,6 +1,6 @@
-package com.aero.refactorapp.domain.repository
+package com.aero.productcatalog.domain.repository
 
-import com.aero.refactorapp.ui.theme.AppThemeMode
+import com.aero.productcatalog.ui.theme.AppThemeMode
 import kotlinx.coroutines.flow.Flow
 
 interface ThemeRepository {

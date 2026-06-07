@@ -1,13 +1,13 @@
 package com.aero.productcatalog.di
 
-import com.aero.refactorapp.data.remote.ProductRemoteDataSource
-import com.aero.refactorapp.data.remote.ProductRemoteDataSourceImpl
-import com.aero.refactorapp.data.repository.CartRepositoryImpl
-import com.aero.refactorapp.data.repository.ProductRepositoryImpl
-import com.aero.refactorapp.data.repository.ThemeRepositoryImpl
-import com.aero.refactorapp.domain.repository.CartRepository
-import com.aero.refactorapp.domain.repository.ProductRepository
-import com.aero.refactorapp.domain.repository.ThemeRepository
+import com.aero.productcatalog.data.remote.ProductRemoteDataSource
+import com.aero.productcatalog.data.remote.ProductRemoteDataSourceImpl
+import com.aero.productcatalog.data.repository.CartRepositoryImpl
+import com.aero.productcatalog.data.repository.ProductRepositoryImpl
+import com.aero.productcatalog.data.repository.ThemeRepositoryImpl
+import com.aero.productcatalog.domain.repository.CartRepository
+import com.aero.productcatalog.domain.repository.ProductRepository
+import com.aero.productcatalog.domain.repository.ThemeRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
