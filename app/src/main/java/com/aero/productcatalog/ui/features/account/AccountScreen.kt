@@ -3,6 +3,7 @@ package com.aero.productcatalog.ui.features.account
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Sell
 import androidx.compose.material3.*
@@ -56,6 +57,12 @@ fun AccountScreen(
                     title = "Aumentar una categoría",
                     icon = Icons.Default.Add,
                     onClick = navigationCallbacks.navigateToAddCategory
+                )
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+                AccountOption(
+                    title = "Gestionar productos",
+                    icon = Icons.AutoMirrored.Filled.List,
+                    onClick = navigationCallbacks.navigateToManageProducts
                 )
             }
         }

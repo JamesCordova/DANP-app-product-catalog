@@ -101,4 +101,30 @@ class ProductRepositoryImpl @Inject constructor(
         )
         refreshProducts()
     }
+
+    override suspend fun updateProduct(
+        productId: Int,
+        name: String,
+        description: String,
+        price: Double,
+        categoryId: Int,
+        imageUrl: String
+    ) {
+        remoteDataSource.updateProduct(
+            productId,
+            ProductInsertDto(
+                name = name,
+                description = description,
+                price = price,
+                categoryId = categoryId,
+                imageUrl = imageUrl
+            )
+        )
+        refreshProducts()
+    }
+
+    override suspend fun deleteProduct(productId: Int) {
+        remoteDataSource.deleteProduct(productId)
+        refreshProducts()
+    }
 }

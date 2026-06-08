@@ -9,6 +9,8 @@ import javax.inject.Inject
 interface ProductRemoteDataSource {
     suspend fun getProducts(): List<ProductDto>
     suspend fun insertProduct(product: ProductInsertDto)
+    suspend fun updateProduct(productId: Int, product: ProductInsertDto)
+    suspend fun deleteProduct(productId: Int)
 }
 
 class ProductRemoteDataSourceImpl @Inject constructor(
@@ -21,5 +23,21 @@ class ProductRemoteDataSourceImpl @Inject constructor(
 
     override suspend fun insertProduct(product: ProductInsertDto) {
         supabaseClient.postgrest["Products"].insert(product)
+    }
+
+    override suspend fun updateProduct(productId: Int, product: ProductInsertDto) {
+        supabaseClient.postgrest["Products"].update(product) {
+            filter {
+                eq("id", productId)
+            }
+        }
+    }
+
+    override suspend fun deleteProduct(productId: Int) {
+        supabaseClient.postgrest["Products"].delete {
+            filter {
+                eq("id", productId)
+            }
+        }
     }
 }

@@ -12,6 +12,8 @@ import com.aero.productcatalog.MainViewModel
 import com.aero.productcatalog.ui.features.account.AccountScreen
 import com.aero.productcatalog.ui.features.addCategory.AddCategoryScreen
 import com.aero.productcatalog.ui.features.addProduct.AddProductScreen
+import com.aero.productcatalog.ui.features.editProduct.EditProductScreen
+import com.aero.productcatalog.ui.features.manageProducts.ManageProductsScreen
 import com.aero.productcatalog.ui.features.cart.CartScreen
 import com.aero.productcatalog.ui.features.favorites.FavoritesScreen
 import com.aero.productcatalog.ui.features.productDetail.DetailScreen
@@ -71,6 +73,18 @@ fun AppNavHost(
         }
         composable(NavScreens.ADD_PRODUCT.route) {
             AddProductScreen(
+                navigationCallbacks = navigationCallbacks,
+                viewModel = hiltViewModel()
+            )
+        }
+        composable(NavScreens.MANAGE_PRODUCTS.route) {
+            ManageProductsScreen(
+                navigationCallbacks = navigationCallbacks,
+                viewModel = hiltViewModel()
+            )
+        }
+        composable("edit_product/{productId}") {
+            EditProductScreen(
                 navigationCallbacks = navigationCallbacks,
                 viewModel = hiltViewModel()
             )

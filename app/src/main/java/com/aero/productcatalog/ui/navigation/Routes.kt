@@ -6,7 +6,9 @@ enum class NavScreens(val label: String, val route: String) {
     CART("Carrito", "cart"),
     ACCOUNT("Mi Cuenta", "account"),
     ADD_CATEGORY("Nueva Categoría", "add_category"),
-    ADD_PRODUCT("Vender Producto", "add_product")
+    ADD_PRODUCT("Vender Producto", "add_product"),
+    MANAGE_PRODUCTS("Gestionar Productos", "manage_products"),
+    EDIT_PRODUCT("Editar Producto", "edit_product/{productId}")
 }
 
 data class NavigationCallbacks(
@@ -17,5 +19,7 @@ data class NavigationCallbacks(
     val navigateToCart: () -> Unit,
     val navigateToAccount: () -> Unit,
     val navigateToAddCategory: () -> Unit,
-    val navigateToAddProduct: () -> Unit
+    val navigateToAddProduct: () -> Unit,
+    val navigateToManageProducts: () -> Unit,
+    val navigateToEditProduct: (Int) -> Unit
 )
