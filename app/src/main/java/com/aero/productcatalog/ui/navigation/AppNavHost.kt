@@ -8,7 +8,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.aero.productcatalog.ui.MainViewModel
+import com.aero.productcatalog.MainViewModel
 import com.aero.productcatalog.ui.features.cart.CartScreen
 import com.aero.productcatalog.ui.features.favorites.FavoritesScreen
 import com.aero.productcatalog.ui.features.productDetail.DetailScreen

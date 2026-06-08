@@ -10,7 +10,7 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.aero.productcatalog.ui.MainViewModel
+import com.aero.productcatalog.MainViewModel
 import com.aero.productcatalog.ui.features.productDetail.DetailViewModel
 import com.aero.productcatalog.ui.navigation.components.AppBottomNavigationBar
 import com.aero.productcatalog.ui.navigation.components.AppToolbar

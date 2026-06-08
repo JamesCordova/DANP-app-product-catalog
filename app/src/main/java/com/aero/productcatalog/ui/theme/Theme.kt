@@ -36,7 +36,7 @@ enum class AppThemeMode {
 }
 
 @Composable
-fun RefactorAppTheme(
+fun ProductCatalogTheme(
     themeMode: AppThemeMode,
     content: @Composable () -> Unit
 ) {
