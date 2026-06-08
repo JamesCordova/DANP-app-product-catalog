@@ -57,7 +57,8 @@ fun AppNavHost(
         }
         composable(NavScreens.ACCOUNT.route) {
             AccountScreen(
-                navigationCallbacks = navigationCallbacks
+                navigationCallbacks = navigationCallbacks,
+                viewModel = hiltViewModel()
             )
         }
     }
