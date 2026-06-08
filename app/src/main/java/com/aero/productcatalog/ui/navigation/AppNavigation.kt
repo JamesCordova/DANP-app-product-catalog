@@ -57,7 +57,10 @@ private fun AppTopBarSelector(
     when (currentRoute) {
         NavScreens.HOME.route -> AppToolbar(title = NavScreens.HOME.label)
         NavScreens.FAVORITES.route -> AppToolbar(title = NavScreens.FAVORITES.label)
-        NavScreens.CART.route -> AppToolbar(title = NavScreens.CART.label)
+        NavScreens.CART.route -> AppToolbar(
+            title = NavScreens.CART.label,
+            onBack = callbacks.navigateBack
+        )
         "detail" -> {
             navBackStackEntry?.let { entry ->
                 val detailViewModel: DetailViewModel = hiltViewModel(entry)
