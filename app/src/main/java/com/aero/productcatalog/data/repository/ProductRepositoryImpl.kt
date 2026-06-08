@@ -4,6 +4,7 @@ import android.util.Log
 import com.aero.productcatalog.data.remote.CategoryRemoteDataSource
 import com.aero.productcatalog.data.remote.ProductRemoteDataSource
 import com.aero.productcatalog.data.remote.dto.CategoryInsertDto
+import com.aero.productcatalog.data.remote.dto.ProductInsertDto
 import com.aero.productcatalog.domain.model.Product
 import com.aero.productcatalog.domain.model.ProductCategory
 import com.aero.productcatalog.domain.repository.ProductRepository
@@ -24,8 +25,8 @@ class ProductRepositoryImpl @Inject constructor(
     private val _products = MutableStateFlow<List<Product>>(emptyList())
     override val products: StateFlow<List<Product>> = _products.asStateFlow()
 
-    private val _categories = MutableStateFlow<List<String>>(emptyList())
-    override val categories: StateFlow<List<String>> = _categories.asStateFlow()
+    private val _categories = MutableStateFlow<List<ProductCategory>>(emptyList())
+    override val categories: StateFlow<List<ProductCategory>> = _categories.asStateFlow()
 
     private val _favoriteProductIds = MutableStateFlow<Set<Int>>(emptySet())
     override val favoriteProductIds: StateFlow<Set<Int>> = _favoriteProductIds.asStateFlow()
@@ -46,16 +47,16 @@ class ProductRepositoryImpl @Inject constructor(
                 val remoteCategories = categoryRemoteDataSource.getCategories()
                 Log.d("ProductRepo", "Fetched ${remoteCategories.size} categories")
 
-                _categories.value = remoteCategories.map { it.name }
+                _categories.value = remoteCategories.map { ProductCategory(it.id, it.name) }
 
                 val mappedProducts = remoteProducts.map { dto ->
-                    val categoryName = remoteCategories.find { it.id == dto.categoryId }?.name ?: "Sin categoría"
+                    val category = _categories.value.find { it.id == dto.categoryId }
                     Product(
                         id = dto.id,
                         name = dto.name,
                         description = dto.description ?: "",
                         price = dto.price,
-                        category = ProductCategory(categoryName),
+                        category = category ?: ProductCategory(label = "Sin categoría"),
                         imageUrl = dto.imageUrl ?: ""
                     )
                 }
@@ -80,5 +81,24 @@ class ProductRepositoryImpl @Inject constructor(
     override suspend fun addCategory(name: String, description: String?) {
         categoryRemoteDataSource.insertCategory(CategoryInsertDto(name, description))
         refreshProducts() // Recargar para obtener la nueva categoria
+    }
+
+    override suspend fun addProduct(
+        name: String,
+        description: String,
+        price: Double,
+        categoryId: Int,
+        imageUrl: String
+    ) {
+        remoteDataSource.insertProduct(
+            ProductInsertDto(
+                name = name,
+                description = description,
+                price = price,
+                categoryId = categoryId,
+                imageUrl = imageUrl
+            )
+        )
+        refreshProducts()
     }
 }

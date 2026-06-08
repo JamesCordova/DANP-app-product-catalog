@@ -16,3 +16,14 @@ data class ProductDto(
     @SerialName("image_url")
     val imageUrl: String? = ""
 )
+
+@Serializable
+data class ProductInsertDto(
+    val name: String,
+    val description: String? = "",
+    val price: Double,
+    @SerialName("category")
+    val categoryId: Int,
+    @SerialName("image_url")
+    val imageUrl: String? = ""
+)

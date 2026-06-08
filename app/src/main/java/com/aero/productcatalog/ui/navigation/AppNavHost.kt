@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import com.aero.productcatalog.MainViewModel
 import com.aero.productcatalog.ui.features.account.AccountScreen
 import com.aero.productcatalog.ui.features.addCategory.AddCategoryScreen
+import com.aero.productcatalog.ui.features.addProduct.AddProductScreen
 import com.aero.productcatalog.ui.features.cart.CartScreen
 import com.aero.productcatalog.ui.features.favorites.FavoritesScreen
 import com.aero.productcatalog.ui.features.productDetail.DetailScreen
@@ -64,6 +65,12 @@ fun AppNavHost(
         }
         composable(NavScreens.ADD_CATEGORY.route) {
             AddCategoryScreen(
+                navigationCallbacks = navigationCallbacks,
+                viewModel = hiltViewModel()
+            )
+        }
+        composable(NavScreens.ADD_PRODUCT.route) {
+            AddProductScreen(
                 navigationCallbacks = navigationCallbacks,
                 viewModel = hiltViewModel()
             )

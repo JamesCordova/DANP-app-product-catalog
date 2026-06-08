@@ -27,7 +27,7 @@ class ProductStoreViewModel @Inject constructor(
     ) { products, categories, favorites, category, query ->
         ProductStoreUiState(
             products = products,
-            categories = listOf("Todos") + categories,
+            categories = listOf("Todos") + categories.map { it.label },
             favoriteProductIds = favorites,
             selectedCategory = category,
             searchQuery = query

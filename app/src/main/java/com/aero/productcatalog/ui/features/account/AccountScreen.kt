@@ -49,7 +49,7 @@ fun AccountScreen(
                 AccountOption(
                     title = "Vender un producto",
                     icon = Icons.Default.Sell,
-                    onClick = viewModel::onSellProductClick
+                    onClick = navigationCallbacks.navigateToAddProduct
                 )
                 HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 AccountOption(
