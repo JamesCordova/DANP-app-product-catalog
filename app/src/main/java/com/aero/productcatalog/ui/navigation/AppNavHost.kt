@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.aero.productcatalog.MainViewModel
+import com.aero.productcatalog.ui.features.account.AccountScreen
 import com.aero.productcatalog.ui.features.cart.CartScreen
 import com.aero.productcatalog.ui.features.favorites.FavoritesScreen
 import com.aero.productcatalog.ui.features.productDetail.DetailScreen
@@ -52,6 +53,11 @@ fun AppNavHost(
                 onCheckoutSuccess = {
                     navigationCallbacks.navigateToHome()
                 }
+            )
+        }
+        composable(NavScreens.ACCOUNT.route) {
+            AccountScreen(
+                navigationCallbacks = navigationCallbacks
             )
         }
     }

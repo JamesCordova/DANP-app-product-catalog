@@ -61,6 +61,7 @@ private fun AppTopBarSelector(
             title = NavScreens.CART.label,
             onBack = callbacks.navigateBack
         )
+        NavScreens.ACCOUNT.route -> AppToolbar(title = NavScreens.ACCOUNT.label)
         "detail" -> {
             navBackStackEntry?.let { entry ->
                 val detailViewModel: DetailViewModel = hiltViewModel(entry)
@@ -99,6 +100,13 @@ fun rememberNavigationCallbacks(navController: NavController): NavigationCallbac
                 navController.navigate(NavScreens.CART.route) {
                     launchSingleTop = true
                 }
+            },
+            navigateToAccount = {
+                navController.navigate(NavScreens.ACCOUNT.route) {
+                    popUpTo(navController.graph.startDestinationId) { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
             }
         )
     }
@@ -113,5 +121,6 @@ private fun NavigationCallbacks.navigateToRoute(route: String) {
         NavScreens.HOME.route -> navigateToHome()
         NavScreens.FAVORITES.route -> navigateToFavorites()
         NavScreens.CART.route -> navigateToCart()
+        NavScreens.ACCOUNT.route -> navigateToAccount()
     }
 }

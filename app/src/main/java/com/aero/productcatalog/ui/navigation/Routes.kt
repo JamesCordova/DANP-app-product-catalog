@@ -3,7 +3,8 @@ package com.aero.productcatalog.ui.navigation
 enum class NavScreens(val label: String, val route: String) {
     HOME("Modular Store", "home"),
     FAVORITES("Favoritos", "favorites"),
-    CART("Carrito", "cart")
+    CART("Carrito", "cart"),
+    ACCOUNT("Mi Cuenta", "account")
 }
 
 data class NavigationCallbacks(
@@ -11,5 +12,6 @@ data class NavigationCallbacks(
     val navigateBack: () -> Unit,
     val navigateToHome: () -> Unit,
     val navigateToFavorites: () -> Unit,
-    val navigateToCart: () -> Unit
+    val navigateToCart: () -> Unit,
+    val navigateToAccount: () -> Unit
 )

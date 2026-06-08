@@ -3,6 +3,7 @@ package com.aero.productcatalog.ui.navigation.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -34,6 +35,12 @@ fun AppBottomNavigationBar(
             onClick = { onNavigate(NavScreens.CART.route) },
             icon = { Icon(Icons.Default.ShoppingCart, contentDescription = null) },
             label = { Text(NavScreens.CART.label) }
+        )
+        NavigationBarItem(
+            selected = currentRoute == NavScreens.ACCOUNT.route,
+            onClick = { onNavigate(NavScreens.ACCOUNT.route) },
+            icon = { Icon(Icons.Default.Person, contentDescription = null) },
+            label = { Text(NavScreens.ACCOUNT.label) }
         )
     }
 }
