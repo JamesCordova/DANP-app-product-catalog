@@ -9,6 +9,8 @@ import javax.inject.Inject
 interface CategoryRemoteDataSource {
     suspend fun getCategories(): List<CategoryDto>
     suspend fun insertCategory(category: CategoryInsertDto)
+    suspend fun updateCategory(categoryId: Int, category: CategoryInsertDto)
+    suspend fun deleteCategory(categoryId: Int)
 }
 
 class CategoryRemoteDataSourceImpl @Inject constructor(
@@ -21,5 +23,21 @@ class CategoryRemoteDataSourceImpl @Inject constructor(
 
     override suspend fun insertCategory(category: CategoryInsertDto) {
         supabaseClient.postgrest["ProductCategories"].insert(category)
+    }
+
+    override suspend fun updateCategory(categoryId: Int, category: CategoryInsertDto) {
+        supabaseClient.postgrest["ProductCategories"].update(category) {
+            filter {
+                eq("id", categoryId)
+            }
+        }
+    }
+
+    override suspend fun deleteCategory(categoryId: Int) {
+        supabaseClient.postgrest["ProductCategories"].delete {
+            filter {
+                eq("id", categoryId)
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ class DetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     
-    val productId: Int = savedStateHandle.get<String>("productId")?.toIntOrNull() ?: 0
+    val productId: Int = savedStateHandle["productId"] ?: 0
 
     val uiState: StateFlow<DetailUiState> = combine(
         productRepository.products.map { products -> products.find { it.id == productId } },

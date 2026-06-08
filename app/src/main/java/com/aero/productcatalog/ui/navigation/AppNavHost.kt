@@ -6,14 +6,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.aero.productcatalog.MainViewModel
 import com.aero.productcatalog.ui.features.account.AccountScreen
 import com.aero.productcatalog.ui.features.addCategory.AddCategoryScreen
+import com.aero.productcatalog.ui.features.editCategory.EditCategoryScreen
 import com.aero.productcatalog.ui.features.addProduct.AddProductScreen
 import com.aero.productcatalog.ui.features.editProduct.EditProductScreen
 import com.aero.productcatalog.ui.features.manageProducts.ManageProductsScreen
+import com.aero.productcatalog.ui.features.manageCategories.ManageCategoriesScreen
 import com.aero.productcatalog.ui.features.cart.CartScreen
 import com.aero.productcatalog.ui.features.favorites.FavoritesScreen
 import com.aero.productcatalog.ui.features.productDetail.DetailScreen
@@ -44,7 +48,10 @@ fun AppNavHost(
                 favoritesViewModel = hiltViewModel()
             )
         }
-        composable("detail/{productId}") {
+        composable(
+            "detail/{productId}",
+            arguments = listOf(navArgument("productId") { type = NavType.IntType })
+        ) {
             DetailScreen(
                 navigationCallbacks = navigationCallbacks,
                 detailViewModel = hiltViewModel()
@@ -83,8 +90,26 @@ fun AppNavHost(
                 viewModel = hiltViewModel()
             )
         }
-        composable("edit_product/{productId}") {
+        composable(NavScreens.MANAGE_CATEGORIES.route) {
+            ManageCategoriesScreen(
+                navigationCallbacks = navigationCallbacks,
+                viewModel = hiltViewModel()
+            )
+        }
+        composable(
+            "edit_product/{productId}",
+            arguments = listOf(navArgument("productId") { type = NavType.IntType })
+        ) {
             EditProductScreen(
+                navigationCallbacks = navigationCallbacks,
+                viewModel = hiltViewModel()
+            )
+        }
+        composable(
+            "edit_category/{categoryId}",
+            arguments = listOf(navArgument("categoryId") { type = NavType.IntType })
+        ) {
+            EditCategoryScreen(
                 navigationCallbacks = navigationCallbacks,
                 viewModel = hiltViewModel()
             )

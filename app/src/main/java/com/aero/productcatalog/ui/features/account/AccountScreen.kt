@@ -60,6 +60,12 @@ fun AccountScreen(
                 )
                 HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
                 AccountOption(
+                    title = "Gestionar categorías",
+                    icon = Icons.AutoMirrored.Filled.List,
+                    onClick = navigationCallbacks.navigateToManageCategories
+                )
+                HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+                AccountOption(
                     title = "Gestionar productos",
                     icon = Icons.AutoMirrored.Filled.List,
                     onClick = navigationCallbacks.navigateToManageProducts

@@ -78,6 +78,14 @@ private fun AppTopBarSelector(
             title = NavScreens.EDIT_PRODUCT.label,
             onBack = callbacks.navigateBack
         )
+        NavScreens.MANAGE_CATEGORIES.route -> AppToolbar(
+            title = NavScreens.MANAGE_CATEGORIES.label,
+            onBack = callbacks.navigateBack
+        )
+        "edit_category" -> AppToolbar(
+            title = NavScreens.EDIT_CATEGORY.label,
+            onBack = callbacks.navigateBack
+        )
         "detail" -> {
             navBackStackEntry?.let { entry ->
                 val detailViewModel: DetailViewModel = hiltViewModel(entry)
@@ -135,6 +143,12 @@ fun rememberNavigationCallbacks(navController: NavController): NavigationCallbac
             },
             navigateToEditProduct = { productId ->
                 navController.navigate("edit_product/$productId")
+            },
+            navigateToManageCategories = {
+                navController.navigate(NavScreens.MANAGE_CATEGORIES.route)
+            },
+            navigateToEditCategory = { categoryId ->
+                navController.navigate("edit_category/$categoryId")
             }
         )
     }
@@ -143,7 +157,8 @@ fun rememberNavigationCallbacks(navController: NavController): NavigationCallbac
 private fun shouldShowBottomBar(route: String): Boolean {
     return route != "detail" && route != NavScreens.CART.route && 
            route != NavScreens.ADD_CATEGORY.route && route != NavScreens.ADD_PRODUCT.route &&
-           route != NavScreens.MANAGE_PRODUCTS.route && !route.startsWith("edit_product")
+           route != NavScreens.MANAGE_PRODUCTS.route && !route.startsWith("edit_product") &&
+           route != NavScreens.MANAGE_CATEGORIES.route && !route.startsWith("edit_category")
 }
 
 private fun NavigationCallbacks.navigateToRoute(route: String) {

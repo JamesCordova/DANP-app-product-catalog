@@ -83,6 +83,16 @@ class ProductRepositoryImpl @Inject constructor(
         refreshProducts() // Recargar para obtener la nueva categoria
     }
 
+    override suspend fun updateCategory(categoryId: Int, name: String, description: String?) {
+        categoryRemoteDataSource.updateCategory(categoryId, CategoryInsertDto(name, description))
+        refreshProducts()
+    }
+
+    override suspend fun deleteCategory(categoryId: Int) {
+        categoryRemoteDataSource.deleteCategory(categoryId)
+        refreshProducts()
+    }
+
     override suspend fun addProduct(
         name: String,
         description: String,
