@@ -1,12 +1,12 @@
 package com.aero.productcatalog.ui.features.productstore.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -26,21 +26,19 @@ fun ProductCategoryButtons(
     onFilterChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Row(
+    LazyRow(
         modifier = modifier
             .padding(8.dp)
-            .fillMaxWidth()
-            .height(48.dp)
             .clip(RoundedCornerShape(percent = 50))
-            .background(MaterialTheme.colorScheme.surfaceDim),
+            .background(MaterialTheme.colorScheme.surfaceVariant)
+            .height(48.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        categories.forEach { category ->
+        items(categories) { category ->
             CategoryFilterButton(
                 label = category,
                 isSelected = currentFilter == category,
-                onClick = { onFilterChange(category) },
-                modifier = Modifier.weight(1f)
+                onClick = { onFilterChange(category) }
             )
         }
     }
@@ -56,23 +54,23 @@ private fun CategoryFilterButton(
     Button(
         onClick = onClick,
         modifier = modifier.fillMaxHeight(),
-        contentPadding = PaddingValues(horizontal = 4.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = if (isSelected) {
                 MaterialTheme.colorScheme.primary
             } else {
-                MaterialTheme.colorScheme.surfaceDim
+                MaterialTheme.colorScheme.surfaceVariant
             },
             contentColor = if (isSelected) {
                 MaterialTheme.colorScheme.onPrimary
             } else {
-                MaterialTheme.colorScheme.onSurface
+                MaterialTheme.colorScheme.onSurfaceVariant
             }
         )
     ) {
         Text(
             text = label,
-            style = MaterialTheme.typography.labelSmall
+            style = MaterialTheme.typography.labelMedium
         )
     }
 }
