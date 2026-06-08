@@ -62,6 +62,10 @@ private fun AppTopBarSelector(
             onBack = callbacks.navigateBack
         )
         NavScreens.ACCOUNT.route -> AppToolbar(title = NavScreens.ACCOUNT.label)
+        NavScreens.ADD_CATEGORY.route -> AppToolbar(
+            title = NavScreens.ADD_CATEGORY.label,
+            onBack = callbacks.navigateBack
+        )
         "detail" -> {
             navBackStackEntry?.let { entry ->
                 val detailViewModel: DetailViewModel = hiltViewModel(entry)
@@ -107,13 +111,16 @@ fun rememberNavigationCallbacks(navController: NavController): NavigationCallbac
                     launchSingleTop = true
                     restoreState = true
                 }
+            },
+            navigateToAddCategory = {
+                navController.navigate(NavScreens.ADD_CATEGORY.route)
             }
         )
     }
 }
 
 private fun shouldShowBottomBar(route: String): Boolean {
-    return route != "detail" && route != NavScreens.CART.route
+    return route != "detail" && route != NavScreens.CART.route && route != NavScreens.ADD_CATEGORY.route
 }
 
 private fun NavigationCallbacks.navigateToRoute(route: String) {

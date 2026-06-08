@@ -1,7 +1,9 @@
 package com.aero.productcatalog.data.repository
 
 import android.util.Log
+import com.aero.productcatalog.data.remote.CategoryRemoteDataSource
 import com.aero.productcatalog.data.remote.ProductRemoteDataSource
+import com.aero.productcatalog.data.remote.dto.CategoryInsertDto
 import com.aero.productcatalog.domain.model.Product
 import com.aero.productcatalog.domain.model.ProductCategory
 import com.aero.productcatalog.domain.repository.ProductRepository
@@ -16,7 +18,8 @@ import javax.inject.Singleton
 
 @Singleton
 class ProductRepositoryImpl @Inject constructor(
-    private val remoteDataSource: ProductRemoteDataSource
+    private val remoteDataSource: ProductRemoteDataSource,
+    private val categoryRemoteDataSource: CategoryRemoteDataSource
 ) : ProductRepository {
     private val _products = MutableStateFlow<List<Product>>(emptyList())
     override val products: StateFlow<List<Product>> = _products.asStateFlow()
@@ -40,7 +43,7 @@ class ProductRepositoryImpl @Inject constructor(
                 Log.d("ProductRepo", "Fetched ${remoteProducts.size} products")
 
                 Log.d("ProductRepo", "Fetching categories...")
-                val remoteCategories = remoteDataSource.getCategories()
+                val remoteCategories = categoryRemoteDataSource.getCategories()
                 Log.d("ProductRepo", "Fetched ${remoteCategories.size} categories")
 
                 _categories.value = remoteCategories.map { it.name }
@@ -72,5 +75,10 @@ class ProductRepositoryImpl @Inject constructor(
             current.add(productId)
         }
         _favoriteProductIds.value = current
+    }
+
+    override suspend fun addCategory(name: String, description: String?) {
+        categoryRemoteDataSource.insertCategory(CategoryInsertDto(name, description))
+        refreshProducts() // Recargar para obtener la nueva categoria
     }
 }

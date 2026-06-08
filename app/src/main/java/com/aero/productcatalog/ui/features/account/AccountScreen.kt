@@ -55,7 +55,7 @@ fun AccountScreen(
                 AccountOption(
                     title = "Aumentar una categoría",
                     icon = Icons.Default.Add,
-                    onClick = viewModel::onAddCategoryClick
+                    onClick = navigationCallbacks.navigateToAddCategory
                 )
             }
         }

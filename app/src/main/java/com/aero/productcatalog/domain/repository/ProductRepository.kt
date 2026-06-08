@@ -8,4 +8,5 @@ interface ProductRepository {
     val categories: StateFlow<List<String>>
     val favoriteProductIds: StateFlow<Set<Int>>
     fun toggleFavorite(productId: Int)
+    suspend fun addCategory(name: String, description: String?)
 }

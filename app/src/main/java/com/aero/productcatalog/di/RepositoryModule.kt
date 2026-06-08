@@ -1,5 +1,7 @@
 package com.aero.productcatalog.di
 
+import com.aero.productcatalog.data.remote.CategoryRemoteDataSource
+import com.aero.productcatalog.data.remote.CategoryRemoteDataSourceImpl
 import com.aero.productcatalog.data.remote.ProductRemoteDataSource
 import com.aero.productcatalog.data.remote.ProductRemoteDataSourceImpl
 import com.aero.productcatalog.data.repository.CartRepositoryImpl
@@ -41,4 +43,10 @@ abstract class RepositoryModule {
     abstract fun bindProductRemoteDataSource(
         productRemoteDataSourceImpl: ProductRemoteDataSourceImpl
     ): ProductRemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindCategoryRemoteDataSource(
+        categoryRemoteDataSourceImpl: CategoryRemoteDataSourceImpl
+    ): CategoryRemoteDataSource
 }
